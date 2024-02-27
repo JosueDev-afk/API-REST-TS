@@ -11,3 +11,4 @@ app.use(router);
 db().then(() => console.log("Conexion Ready"));
 app.listen(PORT, () => console.log(`Listo por el puerto ${PORT}`));
 
+export default app;
