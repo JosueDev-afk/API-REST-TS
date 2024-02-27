@@ -9,6 +9,8 @@ const router = Router();
 
 router.get("/api/:SKU", getServidor);
 
+router.get("/api/all")
+
 router.post("/api/", postProductList);
 
 

@@ -29,4 +29,6 @@ const postProductList = async ({ body }: Request, res: Response) => {
 
 
 
+
+
 export { getServidor, postProductList };
