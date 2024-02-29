@@ -2,6 +2,7 @@ import { Request, Response, Router } from "express";
 import {
   getServidor,
   postProductList,
+  getProducts,
 } from "../controllers/producto";
 
 const router = Router();
@@ -9,7 +10,7 @@ const router = Router();
 
 router.get("/api/:SKU", getServidor);
 
-router.get("/api/all")
+router.get("/all", getProducts)
 
 router.post("/api/", postProductList);
 

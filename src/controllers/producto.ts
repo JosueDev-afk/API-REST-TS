@@ -3,6 +3,7 @@ import dbConnect from "../config/mongo";
 import {
   getProducto,
   insertProductList,
+  getAllProducts,
 
 } from "../services/producto";
 import { handleHttp } from "../utils/error.handle";
@@ -18,6 +19,15 @@ const getServidor = async ({ params }: Request, res: Response) => {
   }
 };
 
+const getProducts = async (req: Request, res: Response) =>{
+  try{
+    const response = await getAllProducts();
+    res.send(response);
+  } catch(e){
+    handleHttp(res, "ERROR_GET_PRODUCTS");
+  }
+}
+
 const postProductList = async ({ body }: Request, res: Response) => {
   try {
     const responseList = await insertProductList(body);
@@ -31,4 +41,4 @@ const postProductList = async ({ body }: Request, res: Response) => {
 
 
 
-export { getServidor, postProductList };
+export { getServidor, postProductList, getProducts };

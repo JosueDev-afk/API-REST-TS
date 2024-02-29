@@ -9,11 +9,14 @@ const insertProductList = async (list: Lista) => {
   return responseInsert;
 };
 
+const getProducto = async (SKU: String) => {
+  const responseServidor = await Servidores.findOne({ SKU: SKU });
+  return responseServidor;
+};
 
+const getAllProducts = async()=>{
+  const responseAll = await List.find({});
+  return responseAll;
+}
 
-  const getProducto = async (SKU: String) => {
-    const responseServidor = await Servidores.findOne({SKU:SKU});
-    return responseServidor;
-  };
-
-export { getProducto, insertProductList };
+export { getProducto, insertProductList, getAllProducts };
