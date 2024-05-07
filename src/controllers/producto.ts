@@ -40,7 +40,6 @@ const postProductList = async ({ body }: Request, res: Response) => {
 
 const postProductsToCompare = async({ body }: Request, res: Response)=>{
   try {
-    console.log(body);
     const responseJob = await productsComparison(body);
     res.send(responseJob)
   } catch (e) {
