@@ -58,7 +58,6 @@ const productsComparison = async (json: string): Promise<JobResponse> => {
 
   console.log(descriptionsString);
 
-  console.log(descriptionsString);
 
   const options = {
     method: 'POST',
