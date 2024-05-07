@@ -42,15 +42,19 @@ interface JobResponse {
   };
 }
 
-const productsComparison = async (products: Product[]): Promise<JobResponse> => {
+const productsComparison = async (json: string): Promise<JobResponse> => {
 
-  const convertJsonToDescriptionArray = (json: string) => {
-    const descriptionArray = JSON.parse(json).results.results.map((item: Product) => item.Description);
-    return descriptionArray;
+  const convertJsonToProductArray = (json: string) => {
+    const jsonObject = JSON.parse(json);
+    if (!Array.isArray(jsonObject.products)) {
+      throw new Error('Invalid JSON object');
+    }
+    const productArray = jsonObject.products.map((item: Product) => item);
+    return productArray;
   };
-  const jsonString = JSON.stringify(products);
-  const descriptionArray = convertJsonToDescriptionArray(jsonString);
-  const descriptionString = descriptionArray.join('\n')
+
+  
+  const descriptionString = convertJsonToProductArray(json).productArray.join('\n')
 
   console.log(descriptionString);
 
