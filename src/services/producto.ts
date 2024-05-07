@@ -47,7 +47,7 @@ interface DataItem {
 }
 
 const productsComparison = async (json: string): Promise<JobResponse> => {
-  console.log(json);
+  console.log(typeof(json));
 
 
 
@@ -58,7 +58,7 @@ const productsComparison = async (json: string): Promise<JobResponse> => {
   // Parse the JSON string to a JavaScript object
   let data: DataItem[] = JSON.parse(parsedJson);
 
-  console.log(parsedJson);
+   console.log(parsedJson);
   
   // Map the descriptions to a new array and join them with newline characters
   let descriptionsString: string = data.map(item => item.Description).join('\n');
