@@ -81,26 +81,13 @@ const productsComparison = async (json: string): Promise<JobResponse> => {
     })
   };
 
-  const response = await fetch(`https://api.priceapi.com/v2/jobs?token=${process.env.PRICE_API_KEY}`, options);
-  const jsonResponse = await response.json();
-  const jobId = jsonResponse.job_id;
-
-  const options2 = { method: 'GET', headers: { accept: 'application/json' } };
-
-  const jobResponse = await fetch(`https://api.priceapi.com/v2/jobs/${jobId}?token=${process.env.PRICE_API_KEY}`, options2)
-    .then(response => response.json())
-    .catch(err => console.error(err));
-
-  const filteredResults = jobResponse.results.results
-    .filter((item: Result) => !item.name.toLowerCase().includes('hpe'))
-    .map((item: Result) => ({
-      name: item.name,
-      url: item.url,
-      min_price: item.min_price,
-      price: item.price
-    }));
-
-  return filteredResults;
+  try {
+    const response = await fetch(`https://api.priceapi.com/v2/jobs?token=${process.env.PRICE_API_KEY}`, options);
+    return response.json();
+  } catch (error) {
+    throw new Error(`Error fetching API: ${error}`);
+  }
+  
 };
 
 
