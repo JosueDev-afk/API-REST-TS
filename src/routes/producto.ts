@@ -3,6 +3,7 @@ import {
   getServidor,
   postProductList,
   getProducts,
+  postProductsToCompare,
 } from "../controllers/producto";
 
 const router = Router();
@@ -13,6 +14,12 @@ router.get("/api/:SKU", getServidor);
 router.get("/all", getProducts)
 
 router.post("/api/", postProductList);
+
+router.post("/api/compare", postProductsToCompare);
+
+
+
+
 
 
 export { router };

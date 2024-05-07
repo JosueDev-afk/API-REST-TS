@@ -4,6 +4,7 @@ import {
   getProducto,
   insertProductList,
   getAllProducts,
+  productsComparison,
 
 } from "../services/producto";
 import { handleHttp } from "../utils/error.handle";
@@ -37,8 +38,18 @@ const postProductList = async ({ body }: Request, res: Response) => {
   }
 };
 
+const postProductsToCompare = async({ body }: Request, res: Response)=>{
+  try {
+    const responseJob = await productsComparison(body);
+    res.send(responseJob)
+  } catch (e) {
+    handleHttp(res, "ERROR_POST_JOB", e);
+  }
+
+};
 
 
 
 
-export { getServidor, postProductList, getProducts };
+
+export { getServidor, postProductList, getProducts, postProductsToCompare };
