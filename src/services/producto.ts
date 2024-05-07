@@ -84,7 +84,6 @@ const productsComparison = async (json: string): Promise<JobResponse> => {
   const response = await fetch(`https://api.priceapi.com/v2/jobs?token=${process.env.PRICE_API_KEY}`, options);
   const jsonResponse = await response.json();
   const jobId = jsonResponse.job_id;
-  console.log(jobId);
 
   const options2 = { method: 'GET', headers: { accept: 'application/json' } };
 
