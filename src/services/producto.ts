@@ -43,6 +43,7 @@ interface JobResponse {
 }
 
 const productsComparison = async (json: string): Promise<JobResponse> => {
+  console.log(json);
 
   const convertJsonToProductArray = (json: string) => {
     const jsonObject = JSON.parse(json);
@@ -50,13 +51,12 @@ const productsComparison = async (json: string): Promise<JobResponse> => {
       throw new Error('Invalid JSON object');
     }
     const productArray = jsonObject.products.map((item: Product) => item);
-    return productArray;
+    return { productArray };
   };
 
-  
-  const descriptionString = convertJsonToProductArray(json).productArray.join('\n')
+  const { productArray } = convertJsonToProductArray(json);
 
-  console.log(descriptionString);
+  console.log(productArray.join('\n'));
 
   const options = {
     method: 'POST',
@@ -66,7 +66,7 @@ const productsComparison = async (json: string): Promise<JobResponse> => {
       country: 'us',
       topic: 'search_results',
       key: 'term',
-      values: `${descriptionString}`,
+      values: productArray.join(','),
       max_pages: '1',
       max_age: '1440',
       timeout: '2'
@@ -92,7 +92,8 @@ const productsComparison = async (json: string): Promise<JobResponse> => {
       min_price: item.min_price,
       price: item.price
     }));
-    return filteredResults;
+
+  return filteredResults;
 };
 
 
