@@ -50,14 +50,13 @@ const productsComparison = async (json: string): Promise<JobResponse> => {
   console.log(typeof(json));
   console.log(json);
   console.log(JSON.stringify(json));
+
   interface DataItem {
     'R-Part Number': string;
     Description: string;
   }
 
-  
-
-  const data: DataItem[] = JSON.parse(json);
+  const data: DataItem[] = JSON.parse(JSON.stringify(json));
 
 
 
