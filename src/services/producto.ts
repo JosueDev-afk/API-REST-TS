@@ -48,13 +48,18 @@ interface DataItem {
 
 const productsComparison = async (json: string): Promise<JobResponse> => {
   console.log(typeof(json));
-
+  console.log(json);
+  console.log(JSON.stringify(json));
   interface DataItem {
     'R-Part Number': string;
     Description: string;
   }
 
+  
+
   const data: DataItem[] = JSON.parse(json);
+
+
 
   const descriptionsString: string = data.map(item => item.Description).join('\n');
 
