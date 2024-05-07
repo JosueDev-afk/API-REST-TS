@@ -53,10 +53,12 @@ const productsComparison = async (json: string): Promise<JobResponse> => {
 
 
   let parsedJson: string = json.toString().replace(/'/g, '"');
-  console.log(parsedJson);
+ 
 
   // Parse the JSON string to a JavaScript object
   let data: DataItem[] = JSON.parse(parsedJson);
+
+  console.log(parsedJson);
   
   // Map the descriptions to a new array and join them with newline characters
   let descriptionsString: string = data.map(item => item.Description).join('\n');
