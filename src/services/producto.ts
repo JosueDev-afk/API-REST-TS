@@ -44,7 +44,13 @@ interface JobResponse {
 
 const productsComparison = async (products: Product[]): Promise<JobResponse> => {
 
-  const descriptionString = products.map((product: Product) => product.Description).join('\n');
+  const convertJsonToDescriptionArray = (json: string) => {
+    const descriptionArray = JSON.parse(json).results.results.map((item: Product) => item.Description);
+    return descriptionArray;
+  };
+  const jsonString = JSON.stringify(products);
+  const descriptionArray = convertJsonToDescriptionArray(jsonString);
+  const descriptionString = descriptionArray.join('\n')
 
   console.log(descriptionString);
 
