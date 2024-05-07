@@ -41,18 +41,24 @@ interface JobResponse {
     results: Result[];
   };
 }
+interface DataItem {
+  'R-Part Number': string;
+  Description: string;
+}
 
 const productsComparison = async (json: string): Promise<JobResponse> => {
   console.log(json);
 
-  const jsonArray: {Description: string }[] = Array.from(JSON.parse(json));
 
 
-  const descriptionsString = jsonArray
-  .filter(item => item.Description.includes('Reman'))
-  .map(item => item.Description)
-  .join('\n');
-console.log(descriptionsString);
+
+  let data: DataItem[] = JSON.parse(json.replace(/'/g, '"'));
+
+  let descriptionsString: string = data.map(item => item.Description).join('\n');
+
+  console.log(descriptionsString);
+
+  console.log(descriptionsString);
 
   const options = {
     method: 'POST',
