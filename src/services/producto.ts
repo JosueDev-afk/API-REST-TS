@@ -3,6 +3,7 @@ import { Lista } from "../interfaces/lista.interface";
 import { Products } from "../interfaces/products.interface";
 import Servidores from "../models/servidor";
 import List from "../models/lista";
+import "dotenv/config";
 
 
 const insertProductList = async (list: Lista) => {
