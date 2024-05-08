@@ -4,6 +4,7 @@ import {
   postProductList,
   getProducts,
   postProductsToCompare,
+  getJobsList,
 } from "../controllers/producto";
 
 const router = Router();
@@ -16,6 +17,8 @@ router.get("/all", getProducts)
 router.post("/api/", postProductList);
 
 router.post("/api/compare", postProductsToCompare);
+
+router.get("/api/jobslist", getJobsList);
 
 
 

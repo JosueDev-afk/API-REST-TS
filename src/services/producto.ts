@@ -20,9 +20,18 @@ const getAllProducts = async () => {
   const responseAll = await List.find({});
   return responseAll;
 }
-type Product = {
-  Description: string;
-};
+
+const getJobs = async () => {
+  const options = { method: 'GET', headers: { accept: 'application/json' } };
+  try {
+    const response = await fetch(`https://api.priceapi.com/v2/jobs?page=1&per_page=10&token=${process.env.PRICE_API_KEY}`, options);
+    return response.json();
+  } catch (error) {
+    throw new Error(`Error fetching API: ${error}`);
+  }
+
+}
+
 interface Result {
   name: string;
   url: string;
@@ -48,24 +57,12 @@ interface DataItem {
 }
 
 const productsComparison = async (json: string): Promise<JobResponse> => {
-  console.log(typeof(json));
-  console.log(json);
-  console.log(JSON.stringify(json));
-
   interface DataItem {
     'R-Part Number': string;
     Description: string;
   }
-
   const data: DataItem[] = JSON.parse(JSON.stringify(json));
-
-
-
   const descriptionsString: string = data.map(item => item.Description).join('\n');
-
-
-  console.log(descriptionsString);
-
 
   const options = {
     method: 'POST',
@@ -93,4 +90,4 @@ const productsComparison = async (json: string): Promise<JobResponse> => {
 
 
 
-export { getProducto, insertProductList, getAllProducts, productsComparison };
+export { getProducto, insertProductList, getAllProducts, productsComparison, getJobs };
